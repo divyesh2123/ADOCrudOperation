@@ -1,0 +1,26 @@
+﻿@model List<ADOCrudOperation.Models.EmpModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<table>
+
+    @foreach(var result in Model)
+            {
+
+    <tr>
+
+        <td>@result.Empid</td>
+        <td>@result.Name</td>
+        <td>@result.City</td>
+        <td>@result.Address</td>
+        
+
+    </tr>
+
+            }
+
+
+</table>
+
