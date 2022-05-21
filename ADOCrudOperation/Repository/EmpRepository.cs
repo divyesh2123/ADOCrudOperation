@@ -54,6 +54,83 @@ namespace ADOCrudOperation.Repository
 
         }
 
+        public bool AddUpdateEmployee(EmpModel empModel)
+        {
+            string spName = "AddNewEmpDetails";
+
+            if(empModel.Empid >0)
+            {
+                spName = "UpdateEmpDetails";
+            }
+
+            SqlCommand com = new SqlCommand(spName, con);
+            com.CommandType = CommandType.StoredProcedure;
+
+            if(empModel.Empid > 0)
+            {
+                com.Parameters.AddWithValue("@EmpId", empModel.Empid);
+            }
+
+            com.Parameters.AddWithValue("@Name", empModel.Name);
+            com.Parameters.AddWithValue("@City", empModel.City);
+            com.Parameters.AddWithValue("@Address", empModel.Address);
+            con.Open();
+            int i = com.ExecuteNonQuery();
+            con.Close();
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+            
+        }
+
+
+        public EmpModel GetEmployeeByEmployeeId(int employeeId)
+        {
+            EmpModel empModel = new EmpModel(); 
+
+            SqlCommand com = new SqlCommand("GetEmployeeByID", con);
+            com.Parameters.AddWithValue("@EmployeeID", employeeId);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+
+            empModel.Empid = Convert.ToInt32(dt.Rows[0]["Id"]);
+            empModel.Name = Convert.ToString(dt.Rows[0]["Name"]);
+            empModel.City = Convert.ToString(dt.Rows[0]["City"]);
+            empModel.Address = Convert.ToString(dt.Rows[0]["Address"]);
+
+
+            return empModel;
+
+        }
+
+        public bool DeleteEmployee(int employeeId)
+        {
+            SqlCommand com = new SqlCommand("DeleteEmpById", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@EmpId", employeeId);
+           
+            con.Open();
+
+            int i = com.ExecuteNonQuery();
+
+            if (i > 0)
+                return true;
+            else
+                return false;
+
+
+        }
        
     }
 }

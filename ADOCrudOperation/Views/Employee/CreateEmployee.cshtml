@@ -1,0 +1,24 @@
+﻿@model ADOCrudOperation.Models.EmpModel
+@{
+    ViewBag.Title = "CreateEmployee";
+}
+
+@using (Html.BeginForm("CreateEmployee", "Employee", FormMethod.Post))
+{
+    @Html.HiddenFor(y => y.Empid);
+
+    @Html.LabelFor(y => y.Name)
+    @Html.TextBoxFor(y => y.Name)
+
+    @Html.LabelFor(y => y.City)
+    @Html.TextBoxFor(y => y.City)
+
+
+    @Html.LabelFor(y => y.Address)
+    @Html.TextAreaFor(y => y.Address)
+
+
+    <input type="submit" value="Save" />
+
+}
+

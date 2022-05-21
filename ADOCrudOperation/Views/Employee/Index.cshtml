@@ -15,8 +15,8 @@
         <td>@result.Name</td>
         <td>@result.City</td>
         <td>@result.Address</td>
-        
-
+        <td><a href="@Url.Action("DeleteEmployee","Employee", new { employeeId = result.Empid})">Delete </a></td>
+        <td><a href="@Url.Action("EditEmployeeInfo","Employee", new { employeeId = result.Empid})">Edit Employee </a></td>
     </tr>
 
             }
