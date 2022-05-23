@@ -3,6 +3,8 @@
     ViewBag.Title = "CreateEmployee";
 }
 
+ @ViewBag.Name
+
 @using (Html.BeginForm("CreateEmployee", "Employee", FormMethod.Post))
 {
     @Html.HiddenFor(y => y.Empid);

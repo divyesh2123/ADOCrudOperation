@@ -13,6 +13,8 @@ namespace ADOCrudOperation.Controllers
         // GET: Employee
         public ActionResult Index()
         {
+           
+
             EmpRepository empRepository = new EmpRepository();
 
             var data = empRepository.GetAllEmployee();
@@ -23,6 +25,7 @@ namespace ADOCrudOperation.Controllers
 
         public ActionResult CreateEmployee()
         {
+            ViewBag.Name = "Add Employee";
 
             return View();
         }
@@ -30,6 +33,7 @@ namespace ADOCrudOperation.Controllers
         [HttpGet]
         public ActionResult EditEmployeeInfo(int employeeId)
         {
+            ViewBag.Name = "Edit Employee";
             EmpRepository empRepository = new EmpRepository();
 
             var d = empRepository.GetEmployeeByEmployeeId(employeeId);
@@ -48,6 +52,7 @@ namespace ADOCrudOperation.Controllers
 
             if (emp)
             {
+                TempData["message"] = "Data Save Suc!";
                 return RedirectToAction("Index");
             }
             else
